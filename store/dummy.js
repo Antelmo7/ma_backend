@@ -20,8 +20,17 @@ async function upsert(table, data) {
   console.log(db);
 }
 
+async function query(table, qu) {
+  let col = await list(table);
+  let keys = Object.keys(qu);
+  let key = keys[0];
+
+  return col.filter(item => item[key] === qu[key])[0] || null;
+}
+
 module.exports = {
   list,
   get,
   upsert,
+  query
 }
