@@ -7,6 +7,10 @@ module.exports = function (injectedStore) {
   let store = injectedStore;
   if (!store) store = require('../../../store/dummy');
 
+  function list() {
+    return store.list(TABLE);
+  }
+
   async function upsert(data) {
     const authData = {
       id: data.id
@@ -34,6 +38,7 @@ module.exports = function (injectedStore) {
   }
 
   return {
+    list,
     upsert,
     login
   }

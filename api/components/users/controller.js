@@ -25,10 +25,9 @@ module.exports = function (injectedStore) {
     if (data.id) user.id = data.id
     else user.id = nanoid();
 
-    if (data.email || data.username || data.password) {
+    if (data.email || data.password) {
       await auth.upsert({
         id: user.id,
-        username: user.username,
         email: data.email,
         password: data.password
       });
