@@ -12,4 +12,11 @@ module.exports = {
     password: process.env.MYSQL_PASS || 'toor',
     database: process.env.MYSQL_DB || 'spoti',
   },
+  mysql_service: {
+    host: process.env.MYSQL_SRV_HOST || 'localhost',
+    port: process.env.MYSQL_SRV_PORT || 3001,
+  },
+  catalogue: {
+    port: process.env.PLAYLISTS_PORT || 3002,
+  }
 };
