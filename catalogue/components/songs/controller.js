@@ -1,6 +1,6 @@
 const plUsers = require('../playlist_users');
 const nanoid = require('nanoid');
-const TABLE = 'playlists';
+const TABLE = 'songs';
 
 module.exports = function (injectedStore) {
   let store = injectedStore;
@@ -16,20 +16,16 @@ module.exports = function (injectedStore) {
     return store.get(TABLE, id);
   }
 
-  async function upsert(data, user_id) {
-    let playlist = {
+  async function upsert(data) {
+    let song = {
       name: data.name,
+      song_url: data.url
     }
 
-    if (data.id) playlist.id = data.id;
-    else playlist.id = nanoid();
+    if (data.id) song.id = data.id;
+    else song.id = nanoid();
 
-    await plUsers.upsert({
-      user_id: user_id,
-      playlist_id: playlist.id,
-    });
-
-    return store.upsert(TABLE, playlist);
+    return store.upsert(TABLE, song);
   }
 
   return {

@@ -3,6 +3,7 @@ const config = require('../config');
 const secret = config.jwt.secret;
 
 const error = require('../utils/error');
+const { use } = require('../catalogue/components/playlists/network');
 
 function sign(data) {
   return jwt.sign(data, secret);
@@ -23,6 +24,11 @@ function getToken(authorization) {
 
   let token = authorization.replace('Bearer ', '');
   return token;
+}
+
+function getId(req) {
+  const user = decodeHeader(req);
+  return user.id;
 }
 
 function decodeHeader(req) {
@@ -46,5 +52,7 @@ const check = {
 
 module.exports = {
   sign,
-  check
+  decodeHeader,
+  check,
+  getId
 };

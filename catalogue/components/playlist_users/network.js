@@ -28,11 +28,9 @@ function get(req, res, next) {
 }
 
 function upsert(req, res, next) {
-  const userId = auth.getId(req);
-  console.log(userId);
   controller.upsert({
     name: req.body.name,
-  }, userId)
+  })
     .then((list) => {
       response.success(req, res, list, 200);
     })

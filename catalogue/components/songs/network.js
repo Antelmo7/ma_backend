@@ -3,8 +3,6 @@ const express = require('express');
 const controller = require('./index');
 const response = require('../../../network/response');
 
-const auth = require('../../../auth');
-
 const router = express.Router();
 
 router.get('/', list);
@@ -28,11 +26,10 @@ function get(req, res, next) {
 }
 
 function upsert(req, res, next) {
-  const userId = auth.getId(req);
-  console.log(userId);
   controller.upsert({
     name: req.body.name,
-  }, userId)
+    url: req.body.url,
+  })
     .then((list) => {
       response.success(req, res, list, 200);
     })
