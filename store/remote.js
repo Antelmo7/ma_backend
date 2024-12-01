@@ -9,7 +9,7 @@ function createRemoteDB(host, port) {
   }
 
   function get(table, id) {
-    return req('GET', table);
+    return req('GET', table, id);
   }
 
   function upsert(table, data) {

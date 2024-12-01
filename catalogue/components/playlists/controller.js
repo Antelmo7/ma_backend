@@ -1,4 +1,5 @@
 const plUsers = require('../playlist_users');
+const plSongs = require('../playlist_songs');
 const nanoid = require('nanoid');
 const TABLE = 'playlists';
 
@@ -14,6 +15,13 @@ module.exports = function (injectedStore) {
   
   function get(id) {
     return store.get(TABLE, id);
+  }
+
+  function addSong(data) {
+    return plSongs.upsert({
+      song_id: data.song_id,
+      playlist_id: data.playlist_id,
+    });
   }
 
   async function upsert(data, user_id) {
@@ -35,6 +43,7 @@ module.exports = function (injectedStore) {
   return {
     list,
     get,
-    upsert
+    upsert,
+    addSong
   }
 }
