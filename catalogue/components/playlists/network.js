@@ -15,7 +15,7 @@ router.post('/song', addSong);
 function list(req, res, next) {
   controller.list()
     .then((list) => {
-      res.status(200).json(list);
+      response.success(req, res, list, 200);
     })
     .catch(next);
 }
