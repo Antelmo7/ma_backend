@@ -12,7 +12,7 @@ router.post('/', upsert);
 function list(req, res, next) {
   controller.list()
     .then((list) => {
-      response.success(req, res, list, 200);
+      res.status(200).json(list);
     })
     .catch(next);
 }

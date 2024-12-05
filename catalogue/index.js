@@ -8,6 +8,19 @@ const likes = require('./components/likes/network');
 const errors = require('../network/errors');
 
 const app = express();
+const cors = require('cors');
+const whiteList = ['http://localhost:5500', 'http://localhost:3000', 'http://localhost:5173'];
+const options = {
+    origin: (origin, cb) => {
+        if (!origin || whiteList.includes(origin)) {
+            cb(null, true);
+        } else {
+            cb(new Error('No permitido'));
+        }
+    }
+}
+
+app.use(cors(options));
 
 
 app.use(express.json());
